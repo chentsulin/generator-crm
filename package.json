@@ -34,11 +34,16 @@
   },
   "homepage": "https://github.com/chentsulin/generator-cnm#readme",
   "devDependencies": {
-    "istanbul": "^0.3.14",
+    "babel-eslint": "^4.0.6",
+    "eslint": "^0.24.1",
+    "eslint-config-airbnb": "0.0.7",
+    "eslint-plugin-react": "^3.2.2",
+    "istanbul": "^0.3.17",
     "mocha": "*"
   },
   "dependencies": {
     "humanize-url": "^1.0.1",
+    "mkdirp": "^0.5.1",
     "normalize-url": "^1.2.1",
     "underscore.string": "^3.0.3",
     "yeoman-generator": "^0.20.1"
