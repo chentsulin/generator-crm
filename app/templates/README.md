@@ -23,30 +23,6 @@ var <%= camelModuleName %> = require('<%= moduleName %>');
 <%= camelModuleName %>('test');
 //=>
 ```
-<% if (cli) { %>
-
-## CLI
-
-```
-$ npm install -g <%= moduleName %>
-```
-```
-$ <%= moduleName %> --help
-
-  Usage
-    <%= moduleName %> [input]
-
-  Example
-    <%= moduleName %>
-    unicorns & rainbows
-
-    <%= moduleName %> ponies
-    ponies & rainbows
-
-  Options
-    --foo  Lorem ipsum. Default: false
-```
-<% } %>
 
 ## API
 

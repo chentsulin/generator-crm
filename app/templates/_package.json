@@ -2,42 +2,52 @@
 	"name": "<%= moduleName %>",
 	"version": "0.1.0",
 	"description": "My module",
+  "main": "lib/index.js",
 	"license": "MIT",
 	"repository": "<%= githubUsername %>/<%= moduleName %>",
   "scripts": {
-    "test": "mocha",
-    "test-travis": "node node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- --reporter dot"
+    "clean": "rimraf lib dist coverage",
+    "lint": "eslint src test examples",
+    "test": "mocha --compilers js:babel/register --recursive",
+    "test:watch": "npm test -- --watch",
+    "test:cov": "babel-node $(npm bin)/isparta cover $(npm bin)/_mocha -- --recursive",<% if (flow) { %>
+    "check": "npm run lint && npm run test",<% } %>
+    "build:lib": "babel src --out-dir lib",
+    "build:umd": "webpack src/index.js dist/<%= moduleName %>.js --config webpack.config.development.js",
+    "build:umd:min": "webpack src/index.js dist/<%= moduleName %>.min.js --config webpack.config.production.js",
+    "build": "npm run build:lib && npm run build:umd && npm run build:umd:min",
+    "preversion": "npm run clean <% if (flow) { %> && npm run check <% } %>",
+    "version": "npm run build",
+    "postversion": "git push && git push --tags && npm run clean",
+    "prepublish": "npm run clean && npm run build"
   },
 	"author": {
 		"name": "<%= name %>",
 		"email": "<%= email %>",
 		"url": "<%= humanizedWebsite %>"
-	},<% if (cli) { %>
-	"bin": "cli.js",<% } %>
+	},
 	"engines": {
 		"node": ">=0.10.0"
 	},
-	"scripts": {
-		"test": "mocha"
-	},
 	"files": [
-		"index.js"<% if (cli) { %>,
-		"cli.js"<% } %>
+    "lib/",
+		"index.js"
 	],
-	"keywords": [<% if (cli) { %>
-		"cli-app",
-		"cli",<% } %>
+	"keywords": [
 		""
 	],
-	"dependencies": {<% if (cli) { %>
-		"meow": "^3.0.0"
-	<% } %>},
 	"devDependencies": {
+    "babel": "^5.8.21",
+    "babel-core": "^5.8.22",
+    "babel-eslint": "^4.0.6",
+    "babel-loader": "^5.3.2",
     "chai": "^3.2.0",
     "eslint": "^0.24.1",
     "eslint-config-airbnb": "0.0.7",
     "eslint-plugin-react": "^3.2.2",
-    "istanbul": "^0.3.17",
-    "mocha": "*"
+    "isparta": "^3.0.3",
+    "mocha": "*",
+    "rimraf": "^2.4.2",
+    "webpack": "^1.11.0"
 	}
 }

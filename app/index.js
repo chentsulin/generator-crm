@@ -37,18 +37,8 @@ module.exports = yeoman.generators.Base.extend({
         return normalizeUrl(val);
 			}
 		}, {
-			name: 'cli',
-			message: 'Do you need a CLI?',
-			type: 'confirm',
-			default: false
-		}, {
-      name: 'libDir',
-      message: 'Do you need a lib directory?',
-      type: 'confirm',
-      default: false
-    }, {
-      name: 'testDir',
-      message: 'Do you need a test directory?',
+      name: 'flow',
+      message: 'Do you need to use flow type?',
       type: 'confirm',
       default: false
     }],
@@ -61,9 +51,8 @@ module.exports = yeoman.generators.Base.extend({
       this.email = this.user.git.email();
       this.website = props.website;
       this.humanizedWebsite = humanizeUrl(this.website);
-      this.cli = props.cli;
-      this.libDir = props.libDir;
-      this.testDir = props.testDir;
+      this.flow = props.flow;
+
 
       this.template('editorconfig', '.editorconfig');
       this.template('gitattributes', '.gitattributes');
@@ -76,39 +65,35 @@ module.exports = yeoman.generators.Base.extend({
       // needed so npm doesn't try to use it and fail
       this.template('_package.json', 'package.json');
       this.template('README.md');
+      this.template('babelrc', '.babelrc');
 
-      if (this.cli) {
-        this.template('cli.js');
-      }
 
       function decreaseCount() {
         asyncCount--;
         if (asyncCount === 0) cb();
       }
 
-      if (this.libDir) {
-        asyncCount++;
-        mkdirp('lib', function(err) {
-          if (err) console.error(err);
-          this.template('_index.js', path.join('lib', 'index.js'));
-          decreaseCount();
-        }.bind(this));
-      }
-
-      if (this.testDir) {
-        asyncCount++;
-        mkdirp('test', function(err) {
-          if (err) console.error(err);
-          this.template('test.js', path.join('test', 'test.js'));
-          decreaseCount();
-        }.bind(this));
-      } else {
-        this.template('test.js');
-      }
+      asyncCount++;
+      mkdirp('src/utils', function(err) {
+        if (err) console.error(err);
+        this.template('index.js', path.join('src', 'index.js'));
+        this.template('index.js', path.join('src', 'utils', 'index.js'));
+        decreaseCount();
+      }.bind(this));
 
 
-      if (asyncCount === 0) cb();
+      asyncCount++;
+      mkdirp('test', function(err) {
+        if (err) console.error(err);
+        this.template('test.js', path.join('test', 'test.js'));
+        decreaseCount();
+      }.bind(this));
 
+      asyncCount++;
+      mkdirp('examples', function(err) {
+        if (err) console.error(err);
+        decreaseCount();
+      }.bind(this));
 
     }.bind(this));
 	},

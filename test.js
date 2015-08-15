@@ -30,6 +30,7 @@ describe('generator', function() {
 			'.gitignore',
 			'.eslintrc',
 			'.travis.yml',
+      '.babelrc',
 			'CHANGELOG.md',
 			'index.js',
 			'LICENSE',

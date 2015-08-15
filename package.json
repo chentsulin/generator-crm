@@ -1,7 +1,7 @@
 {
-  "name": "generator-cnm",
+  "name": "generator-cfm",
   "version": "0.1.0",
-  "description": "Scaffold out a node module",
+  "description": "Scaffold out a frontend module",
   "license": "MIT",
   "scripts": {
     "test": "mocha",
@@ -16,13 +16,13 @@
     "boilerplate",
     "template",
     "scaffold",
-    "node",
+    "frontend",
     "module",
-    "node_module"
+    "babel"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chentsulin/generator-cnm.git"
+    "url": "git+https://github.com/chentsulin/generator-cfm.git"
   },
   "author": {
     "name": "C. T. Lin",
@@ -30,11 +30,10 @@
     "url": "https://github.com/chentsulin"
   },
   "bugs": {
-    "url": "https://github.com/chentsulin/generator-cnm/issues"
+    "url": "https://github.com/chentsulin/generator-cfm/issues"
   },
-  "homepage": "https://github.com/chentsulin/generator-cnm#readme",
+  "homepage": "https://github.com/chentsulin/generator-cfm#readme",
   "devDependencies": {
-    "babel-eslint": "^4.0.6",
     "eslint": "^0.24.1",
     "eslint-config-airbnb": "0.0.7",
     "eslint-plugin-react": "^3.2.2",
