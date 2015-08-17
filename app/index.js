@@ -90,8 +90,32 @@ module.exports = yeoman.generators.Base.extend({
       }.bind(this));
 
       asyncCount++;
-      mkdirp('examples', function(err) {
+      mkdirp('examples/simple/components', function(err) {
         if (err) console.error(err);
+        this.template(
+          path.join('example', 'components', 'App.js'),
+          path.join('examples', 'simple', 'components', 'App.js')
+        );
+        this.template(
+          path.join('example', 'index.html'),
+          path.join('examples', 'simple', 'index.html')
+        );
+        this.template(
+          path.join('example', 'index.js'),
+          path.join('examples', 'simple', 'index.js')
+        );
+        this.template(
+          path.join('example', 'server.js'),
+          path.join('examples', 'simple', 'server.js')
+        );
+        this.template(
+          path.join('example', 'webpack.config.js'),
+          path.join('examples', 'simple', 'webpack.config.js')
+        );
+        this.template(
+          path.join('example', '_package.json'),
+          path.join('examples', 'simple', 'package.json')
+        );
         decreaseCount();
       }.bind(this));
 
