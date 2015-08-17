@@ -67,6 +67,10 @@ module.exports = yeoman.generators.Base.extend({
       this.template('README.md');
       this.template('babelrc', '.babelrc');
 
+      if (this.flow) {
+        this.template('flowconfig', '.flowconfig');
+      }
+
 
       function decreaseCount() {
         asyncCount--;

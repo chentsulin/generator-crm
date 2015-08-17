@@ -14,7 +14,7 @@ describe('generator', function() {
 
     helpers.testDirectory(path.join(__dirname, 'temp'), function(err) {
       if (err) return cb(err);
-      this.generator = helpers.createGenerator('cnm:app', deps, null, { skipInstall: true });
+      this.generator = helpers.createGenerator('cfm:app', deps, null, { skipInstall: true });
       cb();
     }.bind(this));
   });
@@ -32,11 +32,12 @@ describe('generator', function() {
 			'.travis.yml',
       '.babelrc',
 			'CHANGELOG.md',
-			'index.js',
 			'LICENSE',
 			'package.json',
 			'README.md',
-			'test.js',
+      path.join('src', 'index.js'),
+      path.join('src', 'utils', 'index.js'),
+      path.join('test', 'test.js'),
       path.join('examples', 'simple', 'index.html'),
       path.join('examples', 'simple', 'index.js'),
       path.join('examples', 'simple', 'server.js'),
