@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import <%= moduleName %> from '<%= moduleName %>';
+import <%= camelModuleName %> from '<%= moduleName %>';
 
 
 class App extends Component {
   render() {
     return (
       <p>
-        {<%= moduleName %>()}
+        {<%= camelModuleName %>()}
       </p>
     );
   }

@@ -1,4 +1,4 @@
-import <%= moduleName %> from './<%= moduleName %>';
+import <%= camelModuleName %> from './<%= moduleName %>';
 
 
-export <%= moduleName %>;
+export default <%= camelModuleName %>;
