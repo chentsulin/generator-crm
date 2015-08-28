@@ -1,4 +1,6 @@
-import <%= camelModuleName %> from './<%= moduleName %>';
+const <%= camelModuleName %> = {
+
+};
 
 
 export default <%= camelModuleName %>;
