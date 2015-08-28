@@ -35,6 +35,8 @@ describe('generator', function() {
 			'LICENSE',
 			'package.json',
 			'README.md',
+      'webpack.config.development.js',
+      'webpack.config.production.js',
       path.join('src', 'index.js'),
       path.join('src', 'utils', 'index.js'),
       path.join('test', 'test.js'),

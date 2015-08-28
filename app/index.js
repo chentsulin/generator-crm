@@ -17,14 +17,14 @@ module.exports = yeoman.generators.Base.extend({
 			message: 'What do you want to name your module?',
 			default: this.appname.replace(/\s/g, '-'),
 			filter: function(val) {
-				return _s.slugify(val);
+        return _s.slugify(val);
 			}
 		}, {
 			name: 'githubUsername',
 			message: 'What is your GitHub username?',
 			store: true,
 			validate: function(val) {
-				return val.length > 0 ? true : 'You have to provide a username';
+        return val.length > 0 ? true : 'You have to provide a username';
 			}
 		}, {
 			name: 'website',
@@ -66,6 +66,8 @@ module.exports = yeoman.generators.Base.extend({
       this.template('_package.json', 'package.json');
       this.template('README.md');
       this.template('babelrc', '.babelrc');
+      this.template('webpack.config.development.js');
+      this.template('webpack.config.production.js');
 
       if (this.flow) {
         this.template('flowconfig', '.flowconfig');
