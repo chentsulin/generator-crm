@@ -1,6 +1,6 @@
 {
   "name": "generator-cfm",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Scaffold out a frontend module",
   "license": "MIT",
   "scripts": {
