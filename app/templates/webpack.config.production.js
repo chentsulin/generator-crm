@@ -9,7 +9,7 @@ module.exports = {
     ]
   },
   output: {
-    library: 'Redux',
+    library: '<%= camelModuleName %>',
     libraryTarget: 'umd'
   },
   resolve: {
