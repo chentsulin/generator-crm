@@ -59,7 +59,6 @@ module.exports = yeoman.generators.Base.extend({
       this.template('gitignore', '.gitignore');
       this.template('eslintrc', '.eslintrc');
       this.template('travis.yml', '.travis.yml');
-      this.template('index.js');
       this.template('LICENSE');
       this.template('CHANGELOG.md');
       // needed so npm doesn't try to use it and fail
