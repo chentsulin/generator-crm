@@ -58,6 +58,7 @@ module.exports = yeoman.generators.Base.extend({
       this.template('gitattributes', '.gitattributes');
       this.template('gitignore', '.gitignore');
       this.template('eslintrc', '.eslintrc');
+      this.template('eslintignore', '.eslintignore');
       this.template('travis.yml', '.travis.yml');
       this.template('LICENSE');
       this.template('CHANGELOG.md');
@@ -120,6 +121,10 @@ module.exports = yeoman.generators.Base.extend({
         this.template(
           path.join('example', '_package.json'),
           path.join('examples', 'simple', 'package.json')
+        );
+        this.template(
+          path.join('example', 'babelrc'),
+          path.join('examples', 'simple', '.babelrc')
         );
         decreaseCount();
       }.bind(this));
