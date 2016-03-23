@@ -1,3 +1,4 @@
+/* eslint quote-props: 0*/
 'use strict';
 
 var normalizeUrl = require('normalize-url');
@@ -9,40 +10,40 @@ var _s = require('underscore.string');
 
 
 module.exports = yeoman.generators.Base.extend({
-	init: function() {
+  init: function () {
     var cb = this.async();
 
     this.prompt([{
-			name: 'moduleName',
-			message: 'What do you want to name your module?',
-			default: this.appname.replace(/\s/g, '-'),
-			filter: function(val) {
+      name: 'moduleName',
+      message: 'What do you want to name your module?',
+      default: this.appname.replace(/\s/g, '-'),
+      filter: function (val) {
         return _s.slugify(val);
-			}
-		}, {
-			name: 'githubUsername',
-			message: 'What is your GitHub username?',
-			store: true,
-			validate: function(val) {
+      }
+    }, {
+      name: 'githubUsername',
+      message: 'What is your GitHub username?',
+      store: true,
+      validate: function (val) {
         return val.length > 0 ? true : 'You have to provide a username';
-			}
-		}, {
-			name: 'website',
-			message: 'What is the URL of your website?',
-			store: true,
-			validate: function(val) {
+      }
+    }, {
+      name: 'website',
+      message: 'What is the URL of your website?',
+      store: true,
+      validate: function (val) {
         return val.length > 0 ? true : 'You have to provide a website URL';
-			},
-			filter: function(val) {
+      },
+      filter: function (val) {
         return normalizeUrl(val);
-			}
-		}, {
+      }
+    }, {
       name: 'flow',
       message: 'Do you need to use flow type?',
       type: 'confirm',
       default: false
     }],
-    function(props) {
+    function (props) {
       var asyncCount = 0;
       this.moduleName = props.moduleName;
       this.camelModuleName = _s.camelize(props.moduleName);
@@ -80,7 +81,7 @@ module.exports = yeoman.generators.Base.extend({
       }
 
       asyncCount++;
-      mkdirp('src/utils', function(err) {
+      mkdirp('src/utils', function (err) {
         if (err) console.error(err);
         this.template('index.js', path.join('src', 'index.js'));
         this.template('index.js', path.join('src', 'utils', 'index.js'));
@@ -89,14 +90,14 @@ module.exports = yeoman.generators.Base.extend({
 
 
       asyncCount++;
-      mkdirp('test', function(err) {
+      mkdirp('test', function (err) {
         if (err) console.error(err);
         this.template('test.js', path.join('test', 'test.js'));
         decreaseCount();
       }.bind(this));
 
       asyncCount++;
-      mkdirp('examples/simple/components', function(err) {
+      mkdirp('examples/simple/components', function (err) {
         if (err) console.error(err);
         this.template(
           path.join('example', 'components', 'App.js'),
@@ -128,10 +129,9 @@ module.exports = yeoman.generators.Base.extend({
         );
         decreaseCount();
       }.bind(this));
-
     }.bind(this));
-	},
-	install: function() {
+  },
+  install: function () {
     this.installDependencies({ bower: false });
   }
 });

@@ -47,7 +47,7 @@ describe('generator', function () {
       path.join('examples', 'simple', 'package.json'),
       path.join('examples', 'simple', '.babelrc'),
       path.join('examples', 'simple', 'components', 'App.js'),
-		];
+    ];
 
     helpers.mockPrompt(this.generator, {
       moduleName: 'test',
