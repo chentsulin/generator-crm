@@ -16,7 +16,7 @@ $ npm install -g generator-cfm
 ## Usage
 
 ```sh
-$ yo cfm
+$ mkdir your-module-name && cd your-module-name && yo cfm
 ```
 
 ## License
