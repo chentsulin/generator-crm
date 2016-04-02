@@ -1,4 +1,4 @@
-/* eslint no-console: 0 */
+/* eslint no-var: 0, no-console: 0, prefer-template: 0 */
 var path = require('path');
 var express = require('express');
 var webpack = require('webpack');

@@ -82,7 +82,7 @@ module.exports = yeoman.generators.Base.extend({
 
       asyncCount++;
       mkdirp('src/utils', function (err) {
-        if (err) console.error(err);
+        if (err) console.error(err); // eslint-disable-line no-console
         this.template('index.js', path.join('src', 'index.js'));
         this.template('index.js', path.join('src', 'utils', 'index.js'));
         decreaseCount();
@@ -91,14 +91,14 @@ module.exports = yeoman.generators.Base.extend({
 
       asyncCount++;
       mkdirp('test', function (err) {
-        if (err) console.error(err);
+        if (err) console.error(err); // eslint-disable-line no-console
         this.template('test.js', path.join('test', 'test.js'));
         decreaseCount();
       }.bind(this));
 
       asyncCount++;
       mkdirp('examples/simple/components', function (err) {
-        if (err) console.error(err);
+        if (err) console.error(err); // eslint-disable-line no-console
         this.template(
           path.join('example', 'components', 'App.js'),
           path.join('examples', 'simple', 'components', 'App.js')

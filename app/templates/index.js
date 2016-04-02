@@ -1,6 +1,6 @@
-const <%= camelModuleName %> = {
+function <%= camelModuleName %>() {
 
-};
+}
 
 
 export default <%= camelModuleName %>;

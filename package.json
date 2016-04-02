@@ -35,7 +35,7 @@
   },
   "homepage": "https://github.com/chentsulin/generator-cfm#readme",
   "devDependencies": {
-    "eslint": "^2.4.0",
+    "eslint": "^2.6.0",
     "eslint-config-airbnb": "^6.2.0",
     "istanbul": "^0.4.2",
     "mocha": "*"
