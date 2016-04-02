@@ -47,14 +47,14 @@ describe('generator', function () {
       path.join('examples', 'simple', 'webpack.config.js'),
       path.join('examples', 'simple', 'package.json'),
       path.join('examples', 'simple', '.babelrc'),
-      path.join('examples', 'simple', 'components', 'App.js'),
+      path.join('examples', 'simple', 'components', 'App.js')
     ];
 
     helpers.mockPrompt(this.generator, {
       moduleName: 'test',
       githubUsername: 'test',
       website: 'test.com',
-      flow: false,
+      flow: false
     });
 
     this.generator.run(function () {
@@ -68,7 +68,7 @@ describe('generator', function () {
       moduleName: 'test',
       githubUsername: 'test',
       website: 'test.com',
-      flow: true,
+      flow: true
     });
 
     this.generator.run(function () {
