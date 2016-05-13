@@ -1,50 +1,50 @@
-/* eslint quote-props: 0*/
+/* eslint quote-props: 0, no-underscore-dangle: 0 */
 'use strict';
 
-var normalizeUrl = require('normalize-url');
-var path = require('path');
-var humanizeUrl = require('humanize-url');
-var yeoman = require('yeoman-generator');
-var mkdirp = require('mkdirp');
-var _s = require('underscore.string');
+const normalizeUrl = require('normalize-url');
+const path = require('path');
+const humanizeUrl = require('humanize-url');
+const yeoman = require('yeoman-generator');
+const mkdirp = require('mkdirp');
+const _s = require('underscore.string');
 
 
-module.exports = yeoman.generators.Base.extend({
-  init: function () {
-    var cb = this.async();
+module.exports = yeoman.Base.extend({
+  init() {
+    const cb = this.async();
 
     this.prompt([{
       name: 'moduleName',
       message: 'What do you want to name your module?',
       default: this.appname.replace(/\s/g, '-'),
-      filter: function (val) {
+      filter(val) {
         return _s.slugify(val);
-      }
+      },
     }, {
       name: 'githubUsername',
       message: 'What is your GitHub username?',
       store: true,
-      validate: function (val) {
+      validate(val) {
         return val.length > 0 ? true : 'You have to provide a username';
-      }
+      },
     }, {
       name: 'website',
       message: 'What is the URL of your website?',
       store: true,
-      validate: function (val) {
+      validate(val) {
         return val.length > 0 ? true : 'You have to provide a website URL';
       },
-      filter: function (val) {
+      filter(val) {
         return normalizeUrl(val);
-      }
+      },
     }, {
       name: 'flow',
       message: 'Do you need to use flow type?',
       type: 'confirm',
-      default: false
-    }],
-    function (props) {
-      var asyncCount = 0;
+      default: false,
+    }])
+    .then((props) => {
+      let asyncCount = 0;
       this.moduleName = props.moduleName;
       this.camelModuleName = _s.camelize(props.moduleName);
       this.githubUsername = props.githubUsername;
@@ -81,23 +81,23 @@ module.exports = yeoman.generators.Base.extend({
       }
 
       asyncCount++;
-      mkdirp('src/utils', function (err) {
+      mkdirp('src/utils', (err) => {
         if (err) console.error(err); // eslint-disable-line no-console
         this.template('index.js', path.join('src', 'index.js'));
         this.template('index.js', path.join('src', 'utils', 'index.js'));
         decreaseCount();
-      }.bind(this));
+      });
 
 
       asyncCount++;
-      mkdirp('test', function (err) {
+      mkdirp('test', (err) => {
         if (err) console.error(err); // eslint-disable-line no-console
         this.template('test.js', path.join('test', 'test.js'));
         decreaseCount();
-      }.bind(this));
+      });
 
       asyncCount++;
-      mkdirp('examples/simple/components', function (err) {
+      mkdirp('examples/simple/components', (err) => {
         if (err) console.error(err); // eslint-disable-line no-console
         this.template(
           path.join('example', 'components', 'App.js'),
@@ -128,10 +128,10 @@ module.exports = yeoman.generators.Base.extend({
           path.join('examples', 'simple', '.babelrc')
         );
         decreaseCount();
-      }.bind(this));
-    }.bind(this));
+      });
+    });
   },
-  install: function () {
+  install() {
     this.installDependencies({ bower: false });
-  }
+  },
 });
