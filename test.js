@@ -7,12 +7,14 @@ const pwd = path.resolve('./');
 
 
 describe('generator', () => {
+  let generator;
+
   beforeEach((done) => {
     const deps = ['../app'];
 
     helpers.testDirectory(path.join(__dirname, 'temp'), (err) => {
       if (err) return done(err);
-      this.generator = helpers.createGenerator('cfm:app', deps, null, { skipInstall: true });
+      generator = helpers.createGenerator('cfm:app', deps, null, { skipInstall: true });
       done();
     });
   });
@@ -48,28 +50,28 @@ describe('generator', () => {
       path.join('examples', 'simple', 'components', 'App.js'),
     ];
 
-    helpers.mockPrompt(this.generator, {
+    helpers.mockPrompt(generator, {
       moduleName: 'test',
       githubUsername: 'test',
       website: 'test.com',
       flow: false,
     });
 
-    this.generator.run(() => {
+    generator.run(() => {
       assert.file(expected);
       done();
     });
   });
 
   it('flow option', (done) => {
-    helpers.mockPrompt(this.generator, {
+    helpers.mockPrompt(generator, {
       moduleName: 'test',
       githubUsername: 'test',
       website: 'test.com',
       flow: true,
     });
 
-    this.generator.run(() => {
+    generator.run(() => {
       assert.file('.flowconfig');
       assert.fileContent('package.json', /"check":/);
       done();
