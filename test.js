@@ -1,30 +1,30 @@
-/* eslint consistent-return: 0 */
 'use strict';
 
-var path = require('path');
-var yeoman = require('yeoman-generator');
-var helpers = yeoman.test;
-var assert = yeoman.assert;
-var pwd = path.resolve('./');
+const path = require('path');
+const helpers = require('yeoman-test');
+const assert = require('yeoman-assert');
+const pwd = path.resolve('./');
 
 
-describe('generator', function () {
-  beforeEach(function (cb) {
-    var deps = ['../app'];
+describe('generator', () => {
+  let generator;
 
-    helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
-      if (err) return cb(err);
-      this.generator = helpers.createGenerator('cfm:app', deps, null, { skipInstall: true });
-      cb();
-    }.bind(this));
+  beforeEach((done) => {
+    const deps = ['../app'];
+
+    helpers.testDirectory(path.join(__dirname, 'temp'), (err) => {
+      if (err) return done(err);
+      generator = helpers.createGenerator('cfm:app', deps, null, { skipInstall: true });
+      done();
+    });
   });
 
-  afterEach(function () {
+  afterEach(() => {
     process.chdir(pwd);
   });
 
-  it('generates expected files', function (cb) {
-    var expected = [
+  it('generates expected files', (done) => {
+    const expected = [
       '.editorconfig',
       '.gitattributes',
       '.gitignore',
@@ -47,34 +47,34 @@ describe('generator', function () {
       path.join('examples', 'simple', 'webpack.config.js'),
       path.join('examples', 'simple', 'package.json'),
       path.join('examples', 'simple', '.babelrc'),
-      path.join('examples', 'simple', 'components', 'App.js')
+      path.join('examples', 'simple', 'components', 'App.js'),
     ];
 
-    helpers.mockPrompt(this.generator, {
+    helpers.mockPrompt(generator, {
       moduleName: 'test',
       githubUsername: 'test',
       website: 'test.com',
-      flow: false
+      flow: false,
     });
 
-    this.generator.run(function () {
+    generator.run(() => {
       assert.file(expected);
-      cb();
+      done();
     });
   });
 
-  it('flow option', function (cb) {
-    helpers.mockPrompt(this.generator, {
+  it('flow option', (done) => {
+    helpers.mockPrompt(generator, {
       moduleName: 'test',
       githubUsername: 'test',
       website: 'test.com',
-      flow: true
+      flow: true,
     });
 
-    this.generator.run(function () {
+    generator.run(() => {
       assert.file('.flowconfig');
       assert.fileContent('package.json', /"check":/);
-      cb();
+      done();
     });
   });
 });
